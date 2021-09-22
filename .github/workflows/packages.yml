@@ -17,3 +17,8 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: unpublish
+        run: npm unpublish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
