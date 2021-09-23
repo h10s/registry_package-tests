@@ -13,6 +13,12 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/actions-sauron
 
+      - name: "Configure git"
+        run: |
+          # Tell git who we are.
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+
       - name: change package name
         run: |
           npx change-package-name "@h10s/test-pkg-`date +%Y-%m-%d-%H-%M`"
