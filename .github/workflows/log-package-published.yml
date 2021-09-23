@@ -13,30 +13,19 @@ jobs:
       - uses: actions/github-script@v4
         with:
           script: |
-            console.log(context.payload)
-
-      - uses: actions/github-script@v4
-        with:
-          script: |
-            console.log(context.payload.registry_package.name)
-
-      - uses: actions/github-script@v4
-        with:
-          script: |
             title = context.payload.registry_package.name
+            console.log(title)
             
-            issues = await octokit.paginate(github.issues.listForRepo, {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: `${context.ref} (${context.sha}) being deployed`,
-              body: `ref: ${context.ref}\nsha: ${context.sha}\nactor: ${context.actor}`,
-              (response) => response.data.map(i => { issue.number, issue.title })
-            })
+            issues = await octokit.paginate(
+                github.issues.listForRepo,
+                { owner: context.repo.owner, repo: context.repo.repo },
+                (response) => response.data.map((issue) => { return { issue.number, issue.title }})
             
-            issue = issues.find(i => i.title === title)
+            existingIssue = issues.find(i => i.title === title)
             
             // create a new issue or comment on an existing issue
-            if (issue === undefined) {
+            if (existingIssue === undefined) {
+              console.log("creating new issue")
               await github.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -44,10 +33,11 @@ jobs:
                 body: context.payload.registry_package.package_version.version,
               })
             } else {
+              console.log("commenting on existing issue")
               await github.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: issue.number,
+                issue_number: existingIssue.number,
                 body: context.payload.registry_package.package_version.version,
               })
             }
