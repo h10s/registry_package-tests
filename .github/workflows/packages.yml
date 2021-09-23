@@ -16,6 +16,8 @@ jobs:
       - name: change package name
         run: |
           npx change-package-name "@h10s/test-pkg-`date +%Y-%m-%d-%H-%M`"
+          git add .
+          git commit -m "publish to npm"
 
       - name: publish version 1.0.0 of package
         run: |
