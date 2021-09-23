@@ -26,7 +26,7 @@ jobs:
       - name: publish patch 1
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -34,7 +34,7 @@ jobs:
       - name: publish patch 2
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -42,7 +42,7 @@ jobs:
       - name: publish patch 3
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -50,7 +50,7 @@ jobs:
       - name: publish patch 4
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -58,7 +58,7 @@ jobs:
       - name: publish patch 5
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -66,7 +66,7 @@ jobs:
       - name: publish patch 6
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -74,7 +74,7 @@ jobs:
       - name: publish patch 7
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -82,7 +82,7 @@ jobs:
       - name: publish patch 8
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
@@ -90,7 +90,7 @@ jobs:
       - name: publish patch 9
         run: |
           sleep 5
-          npm patch
+          npm version patch
           npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
