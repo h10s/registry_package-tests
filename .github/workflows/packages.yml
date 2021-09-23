@@ -1,4 +1,4 @@
-name: Publish and unpublish package
+name: Publish and update package
 on:
   workflow_dispatch:
 
@@ -12,14 +12,85 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/actions-sauron
-          
-      - name: publish
-        run: npm publish
-        continue-on-error: true
+
+      - name: change package name
+        run: |
+          npx change-package-name "@h10s/test-pkg-`date +%Y-%m-%d-%H-%M`"
+
+      - name: publish version 1.0.0 of package
+        run: |
+          npm publish
         env:
          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
-       
-      - name: unpublish
-        run: npm unpublish --force
+
+      - name: publish patch 1
+        run: |
+          sleep 5
+          npm patch
+          npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 2
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 3
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 4
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 5
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 6
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 7
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 8
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: publish patch 9
+        run: |
+          sleep 5
+          npm patch
+          npm publish
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PAT }}
