@@ -13,24 +13,43 @@ jobs:
       - uses: actions/github-script@v4
         with:
           script: |
-            title = context.payload.registry_package.name
+            let title, body
+            switch (context.eventName) {
+              case "pull_request":
+                title = context.payload.pull_request.title
+                body = context.payload.pull_request.number
+                break
+
+              case "registry_package":
+                title = context.payload.registry_package.name
+                body = context.payload.registry_package.package_version.version 
+                break
+
+              default:
+                title = context.eventName
+                body = context.action ? context.action : "something"
+            }
+
             console.log(title)
-            
-            issues = await octokit.paginate(
-                github.issues.listForRepo,
-                { owner: context.repo.owner, repo: context.repo.repo },
-                (response) => response.data.map((issue) => { return { issue.number, issue.title }})
-            
-            existingIssue = issues.find(i => i.title === title)
-            
+            console.log(body)
+
+            // search for an existing issue with the same title
+            // https://github.com/actions/github-script#welcome-a-first-time-contributor shows a different way to do pagination
+            issues = await github.paginate(
+              github.issues.listForRepo,
+              { owner: context.repo.owner, repo: context.repo.repo },
+              (response) => response.data.map((issue) => { return { number: issue.number, title: issue.title } }))
+
+            const existingIssue = issues.find(i => i.title === title)
+
             // create a new issue or comment on an existing issue
             if (existingIssue === undefined) {
               console.log("creating new issue")
               await github.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                title: title,
-                body: context.payload.registry_package.package_version.version,
+                title,
+                body,
               })
             } else {
               console.log("commenting on existing issue")
@@ -38,6 +57,6 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: existingIssue.number,
-                body: context.payload.registry_package.package_version.version,
+                body,
               })
             }
