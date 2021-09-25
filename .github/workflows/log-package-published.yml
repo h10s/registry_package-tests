@@ -9,7 +9,9 @@ jobs:
       issues: write
     steps:
       - run: cat $GITHUB_EVENT_PATH
-      
+
+      - run: printenv
+
       - uses: actions/github-script@v4
         with:
           script: |
