@@ -42,23 +42,20 @@ jobs:
               { owner: context.repo.owner, repo: context.repo.repo },
               (response) => response.data.map((issue) => { return { number: issue.number, title: issue.title } }))
 
-            const existingIssue = issues.find(i => i.title === title)
-
-            // create a new issue or comment on an existing issue
-            if (existingIssue === undefined) {
+            let issue = issues.find(i => i.title === title)
+            if (issue === undefined) {
               console.log("creating new issue")
-              await github.issues.create({
+              issue = await github.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title,
-                body,
-              })
-            } else {
-              console.log("commenting on existing issue")
-              await github.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: existingIssue.number,
-                body,
+                body: `Each event is tracked by a comment below 👇`,
               })
             }
+              
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body,
+            })
