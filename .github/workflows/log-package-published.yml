@@ -45,13 +45,13 @@ jobs:
             let issue = issues.find(i => i.title === title)
             if (issue === undefined) {
               console.log("creating new issue...")
-              issue = await github.issues.create({
+              issue = (await github.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title,
                 body: `Each event is tracked by a comment below 👇`,
-              })
-              console.log("created")
+              })).data
+              console.log(`created issue #${issue.number}`)
             } else {
               console.log("existing issue found")
             }
@@ -66,10 +66,12 @@ jobs:
                   issue_number: issue.number,
                   body,
                 })
-                console.log("added")
+                console.log("comment added")
                 break
               } catch (error) {
                  console.log(error)
               }
+              
+              // sleep 100ms and try again
               await new Promise(resolve => setTimeout(resolve, 100))
             }
