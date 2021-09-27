@@ -13,6 +13,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
+          # oops, should probably be https://npm.pkg.github.com/h10s
           registry-url: https://npm.pkg.github.com/actions-sauron
 
       - name: "Configure git"
