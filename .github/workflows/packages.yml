@@ -36,7 +36,7 @@ jobs:
 
       - name: publish patch 1
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -44,7 +44,7 @@ jobs:
 
       - name: publish patch 2
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -52,7 +52,7 @@ jobs:
 
       - name: publish patch 3
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -60,7 +60,7 @@ jobs:
 
       - name: publish patch 4
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -68,7 +68,7 @@ jobs:
 
       - name: publish patch 5
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -76,7 +76,7 @@ jobs:
 
       - name: publish patch 6
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -84,7 +84,7 @@ jobs:
 
       - name: publish patch 7
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -92,7 +92,7 @@ jobs:
 
       - name: publish patch 8
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
@@ -100,7 +100,7 @@ jobs:
 
       - name: publish patch 9
         run: |
-          sleep 5
+          sleep 3
           npm version patch
           npm publish
         env:
